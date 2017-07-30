@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Geo');
+
 header {
     text-align: center;
+    font-family: 'Geo', sans-serif;
+}
+
+header h1 {
+    font-size: 6em;
+    margin-bottom: 0;
+}
+
+header h2 {
+    margin-top: 0;
 }
 
 .main-panel {
     background: red;
-    width: 100px;
-    height: 100px;
+    width: 500px;
+    height: 500px;
+    margin: 2vw auto 0 auto; /*top should be changed using jquerry for mobile devices*/
 }
