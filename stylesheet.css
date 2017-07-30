@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Geo');
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Geo');
 
 header {
     text-align: center;
@@ -10,13 +10,38 @@ header h1 {
     margin-bottom: 0;
 }
 
-header h2 {
+header p {
+    font-size: 2em;
     margin-top: 0;
 }
 
-.main-panel {
-    background: red;
+.container-with-border {
+    background: #C6C6C6;
+    border: 10px solid #C6C6C6;
+    border-radius: 10px;
     width: 500px;
     height: 500px;
     margin: 2vw auto 0 auto; /*top should be changed using jquerry for mobile devices*/
+    text-align: center;
+}
+
+.main-panel {
+    background: #232323;
+    border: 10px solid #232323;
+    border-radius: 10px;
+    width: 480px;
+    height: 480px;
+}
+
+.main-panel h2 {
+    font-size: 2.5em;
+    font-family: 'Droid Sans', sans-serif;
+    color: white;
+    margin-top: 2em;
+}
+
+.game-starter button {
+    color: white;
+    background: #232323;
+    border: none;
 }
