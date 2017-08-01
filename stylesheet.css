@@ -45,6 +45,10 @@ header p {
     visibility: hidden;
 }
 
+.game-choice {
+    visibility: hidden;
+}
+
 /*.game-starter .game-choice button {
     color: white;
     background: #232323;
