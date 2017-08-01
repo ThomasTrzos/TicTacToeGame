@@ -42,9 +42,10 @@ header p {
 
 .game-starter {
     box-sizing: border-box;
+    visibility: hidden;
 }
 
-.game-starter .game-choice button {
+/*.game-starter .game-choice button {
     color: white;
     background: #232323;
     border: none;
@@ -55,20 +56,20 @@ header p {
 }
 
 .game-choice button:hover {
-    /*-webkit-transition: border 0.2s ease;
+    !*-webkit-transition: border 0.2s ease;
     -moz-transition: border 0.2s ease;
     -o-transition: border 0.2s ease;
-    transition: border 0.2s ease;*/
+    transition: border 0.2s ease;*!
     border: 2px dashed white;
     border-radius: 10px;
 }
 
 .game-choice button:focus {
-   /* -webkit-transition: border 0.2s ease;
+   !* -webkit-transition: border 0.2s ease;
     -moz-transition: border 0.2s ease;
     -o-transition: border 0.2s ease;
-    transition: border 0.2s ease;*/
+    transition: border 0.2s ease;*!
     border: 2px dashed white;
     border-radius: 10px;
     outline: 0;
-}
+}*/
