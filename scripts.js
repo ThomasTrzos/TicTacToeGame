@@ -7,7 +7,8 @@ window.onload = function(){
     for (var i=0; i<li.length; i++)
     {
         li[i].addEventListener('click', function(e) {
-            console.log(e.target.parentNode.className);
+            e.target.innerHTML = "O"; // or "X"
+            /*console.log(e.target.parentNode.className);*/
             },false);
     }
 
