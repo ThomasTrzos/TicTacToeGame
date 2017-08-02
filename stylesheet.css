@@ -27,10 +27,11 @@ header p {
 
 .main-panel {
     background: #232323;
-    border: 10px solid #232323;
+    border: 6px solid #232323;
     border-radius: 10px;
     width: 480px;
     height: 480px;
+    position: relative;
 }
 
 .main-panel h2 {
@@ -47,6 +48,57 @@ header p {
 
 .game-choice {
     visibility: hidden;
+}
+
+.fields {
+    color: white;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.fields li {
+    width: 30%;
+    height: 30%;
+    display: inline-block;
+    position: relative;
+    z-index: 1000;
+    margin-left: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    background: #232323;
+}
+
+li {
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+
+li i {
+    font-size: 10rem;
+    text-align: center;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-style: normal;
+    color: rgba(220, 220, 220, .7);
+    z-index: 500;
+}
+
+.game-board {
+    margin-top: 10px;
+    position: relative;
+}
+
+#canvas {
+    height: 95%;
+    width: 92%;
+    margin-top: 2px;
+    position: absolute;
+    z-index: 0;
+    left: 20px;
+    opacity: 1;
+    background: white;
+    display: block;
 }
 
 /*.game-starter .game-choice button {
