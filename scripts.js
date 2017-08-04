@@ -6,6 +6,9 @@ var gameMode;
 var gameChoice;
 var gameBoard;
 
+var combos;
+var board;
+
 
 window.onload = function(){
 
@@ -25,6 +28,7 @@ window.onload = function(){
         li[i].addEventListener("click", function(e) {
             e.target.innerHTML = userA; // or "X"
             htmlListToArray();
+            console.log(checkGameResult(userA));
             },false);
     }
 
@@ -87,12 +91,36 @@ function addAnimBetweenDivs(divA, divB) { // hide and show divs
 
 function htmlListToArray() {
 
-    var optionTexts = [];
-    $("ul li").each(function() { optionTexts.push($(this).text().toString().replace(/\s/g,'')) });
+    board = [];
 
-    for (var i = 0; i < optionTexts.length; i++) {
-        console.log(optionTexts[i]);
+    $("ul li").each(function() { board.push($(this).text().toString().replace(/\s/g,''))});
+
+}
+
+function checkGameResult(symbol) {
+
+    combos = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    for(var i = 0; i<combos.length; i++) {
+
+        console.log(board[combos[i][0]] + " " + board[combos[i][1]] + " " + board[combos[i][2]]);
+
+        if(board[combos[i][0]] === symbol && board[combos[i][1]] === symbol && board[combos[i][2]] === symbol) {
+
+            return true;
+        }
     }
+
+    return false;
 }
 
 
