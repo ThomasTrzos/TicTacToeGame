@@ -10,8 +10,8 @@ window.onload = function(){
 
     // get all divisions
 
-    gameChoice = document.getElementById("game-choice");
-    gameBoard = document.getElementById("game-board");
+    gameChoice = $("#game-choice");
+    gameBoard = $("#game-board");
 
     // -----------------
 
@@ -21,41 +21,56 @@ window.onload = function(){
     for (var i=0; i<li.length; i++)
     {
         li[i].addEventListener("click", function(e) {
-            e.target.innerHTML = "O"; // or "X"
+            e.target.innerHTML = userA; // or "X"
             },false);
     }
 
     // add event listener for 'X' & 'O' buttons in game-choice division
 
-    var x = document.getElementById("x-btn");
-    var o = document.getElementById("o-btn");
-    var back = document.getElementById("back-btn");
 
-    addListenerForButton(x, function action() {
+    addListenerForButton("x-btn", function action() {
         userA = "X";
         userB = "O";
+        addAnimBetweenDivs(gameChoice, gameBoard);
     });
 
-    addListenerForButton(o, function action() {
+    addListenerForButton("o-btn", function action() {
         userA = "O";
         userB = "X";
+        addAnimBetweenDivs(gameChoice, gameBoard)
     });
 
-    addListenerForButton(back, function action() {
-        //TODO: back to previous diviison
+    addListenerForButton("back-btn", function action() {
+        addAnimBetweenDivs(gameChoice, gameBoard); // change it
     });
 
 };
 
-function addListenerForButton(button, action) {
+function addListenerForButton(id, action) {
 
-    button.addEventListener("click", function (e) {
-        functionality();
-    }, false);
+    var element = $("#" + id);
+
+    element.on("click", function() {
+        action();
+    })
 
 }
 
-function selectChar() {
+function addAnimBetweenDivs(divA, divB) { // hide and show divs
+
+    divA.addClass('hidden');
+
+    setTimeout(function () {
+        divA.addClass('visually-hidden');
+
+    }, 500);
+
+
+    divB.removeClass('hidden');
+
+    setTimeout(function () {
+        divB.removeClass('visually-hidden');
+    }, 500);
 
 }
 
