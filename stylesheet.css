@@ -46,7 +46,9 @@ header p {
     visibility: hidden;
 }
 
-.game-choice {
+.game-choice h2 {
+    font-size: 4em;
+    margin-top: 1em;
 }
 
 .game-choice button {
@@ -57,14 +59,28 @@ header p {
 
     -webkit-transition-property: color; /* Safari */
     -webkit-transition-duration: 0.5s; /* Safari */
-    -webkit-transition-delay: 0.5s; /* Safari */
     transition-property: color;
     transition-duration: 0.5s;
-    transition-delay: 0.1s;
+}
+
+.game-choice button:focus {
+    color: white;
 }
 
 .game-choice button:hover {
     color: white;
+}
+
+.xy-btns {
+    font-size: 1.5em;
+}
+
+#o-btn {
+    margin-left: 0.5em;
+}
+
+#back-btn {
+    margin-top: 1.2em;
 }
 /* ------------------------------------- */
 
