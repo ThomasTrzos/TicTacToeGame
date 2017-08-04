@@ -2,14 +2,16 @@
 var userA = "";
 var userB = ""; // or computer
 
-var gameChoice = "";
-var gameBoard = "";
+var gameMode;
+var gameChoice;
+var gameBoard;
 
 
 window.onload = function(){
 
     // get all divisions
 
+    gameMode = $("#game-mode");
     gameChoice = $("#game-choice");
     gameBoard = $("#game-board");
 
@@ -22,11 +24,20 @@ window.onload = function(){
     {
         li[i].addEventListener("click", function(e) {
             e.target.innerHTML = userA; // or "X"
+            htmlListToArray();
             },false);
     }
 
     // add event listener for 'X' & 'O' buttons in game-choice division
 
+
+    addListenerForButton("one-btn", function action() {
+        addAnimBetweenDivs(gameMode, gameChoice);
+    });
+
+    addListenerForButton("two-btn", function action() {
+        addAnimBetweenDivs(gameMode, gameChoice);
+    });
 
     addListenerForButton("x-btn", function action() {
         userA = "X";
@@ -41,7 +52,7 @@ window.onload = function(){
     });
 
     addListenerForButton("back-btn", function action() {
-        addAnimBetweenDivs(gameChoice, gameBoard); // change it
+        addAnimBetweenDivs(gameChoice, gameMode); // change it
     });
 
 };
@@ -72,6 +83,16 @@ function addAnimBetweenDivs(divA, divB) { // hide and show divs
         divB.removeClass('visually-hidden');
     }, 500);
 
+}
+
+function htmlListToArray() {
+
+    var optionTexts = [];
+    $("ul li").each(function() { optionTexts.push($(this).text().toString().replace(/\s/g,'')) });
+
+    for (var i = 0; i < optionTexts.length; i++) {
+        console.log(optionTexts[i]);
+    }
 }
 
 

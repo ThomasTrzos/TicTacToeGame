@@ -47,6 +47,9 @@ header p {
 .game-mode {
     font-size: 2em;
     margin-top: 2em;
+    transition: all 0.5s linear;
+    transition-property: display, opacity;
+    position: relative;
 }
 
 .one-two-btns {
@@ -121,7 +124,6 @@ header p {
 #back-btn {
     margin-top: 1.2em;
 }
-/* ------------------------------------- */
 
 .fields {
     color: white;
