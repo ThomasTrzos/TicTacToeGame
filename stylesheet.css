@@ -38,12 +38,46 @@ header p {
     font-size: 2.5em;
     font-family: 'Droid Sans', sans-serif;
     color: white;
-    margin-top: 2em;
 }
 
 .game-starter {
     box-sizing: border-box;
-    visibility: hidden;
+}
+
+.game-mode {
+    font-size: 2em;
+    margin-top: 2em;
+}
+
+.one-two-btns {
+    display: inline-block;
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.one-two-btns button {
+    background: #232323;
+    border: none;
+    outline: none;
+
+    -webkit-transition-property: color; /* Safari */
+    -webkit-transition-duration: 0.5s; /* Safari */
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+
+#one-btn {
+    margin-bottom: 0.2em;
+}
+
+.game-mode button:hover {
+    color: white;
+}
+
+.game-mode button:focus {
+    color: white;
 }
 
 .game-choice {
@@ -142,35 +176,6 @@ li i {
     background: white;
     display: block;
 }
-
-/*.game-starter .game-choice button {
-    color: white;
-    background: #232323;
-    border: none;
-    font-size: 2em;
-    margin-top: 2em;
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
-.game-choice button:hover {
-    !*-webkit-transition: border 0.2s ease;
-    -moz-transition: border 0.2s ease;
-    -o-transition: border 0.2s ease;
-    transition: border 0.2s ease;*!
-    border: 2px dashed white;
-    border-radius: 10px;
-}
-
-.game-choice button:focus {
-   !* -webkit-transition: border 0.2s ease;
-    -moz-transition: border 0.2s ease;
-    -o-transition: border 0.2s ease;
-    transition: border 0.2s ease;*!
-    border: 2px dashed white;
-    border-radius: 10px;
-    outline: 0;
-}*/
 
 .hidden {
     display: none;
