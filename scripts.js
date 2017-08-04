@@ -9,6 +9,8 @@ var gameBoard;
 var combos;
 var board;
 
+var turn = true; // whose turn is now (true - playerOne, false - playerTwo)
+
 
 window.onload = function(){
 
@@ -26,9 +28,14 @@ window.onload = function(){
     for (var i=0; i<li.length; i++)
     {
         li[i].addEventListener("click", function(e) {
-            e.target.innerHTML = userA; // or "X"
+
+            if(turn) {
+                e.target.innerHTML = userA;
+            } else {
+                e.target.innerHTML = userB;
+            }
+
             htmlListToArray();
-            console.log(checkGameResult(userA));
             },false);
     }
 
@@ -58,6 +65,19 @@ window.onload = function(){
     addListenerForButton("back-btn", function action() {
         addAnimBetweenDivs(gameChoice, gameMode); // change it
     });
+
+    // GAME LOGIC - it shouldn't start on window.load
+
+    // check who stars - player 1 or player 2 (computer)
+
+    turn = Math.floor((Math.random() * 10) + 1) % 2 === 0; // true - playerOne, false - playerTwo
+
+    if(turn) {
+        alert("Your turn!"); // innerHTML
+    } else {
+        alert("UserB turn"); // innerHTML
+    }
+
 
 };
 
