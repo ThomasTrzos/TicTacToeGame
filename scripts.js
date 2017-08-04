@@ -2,7 +2,18 @@
 var userA = "";
 var userB = ""; // or computer
 
+var gameChoice = "";
+var gameBoard = "";
+
+
 window.onload = function(){
+
+    // get all divisions
+
+    gameChoice = document.getElementById("game-choice");
+    gameBoard = document.getElementById("game-board");
+
+    // -----------------
 
     var fields = document.getElementById("fields");
     var li = fields.getElementsByTagName("li");
@@ -11,7 +22,6 @@ window.onload = function(){
     {
         li[i].addEventListener("click", function(e) {
             e.target.innerHTML = "O"; // or "X"
-            /*console.log(e.target.parentNode.className);*/
             },false);
     }
 
@@ -21,32 +31,26 @@ window.onload = function(){
     var o = document.getElementById("o-btn");
     var back = document.getElementById("back-btn");
 
-    addListenerForButton(x);
-    addListenerForButton(o);
-    addListenerForButton(back);
+    addListenerForButton(x, function action() {
+        userA = "X";
+        userB = "O";
+    });
+
+    addListenerForButton(o, function action() {
+        userA = "O";
+        userB = "X";
+    });
+
+    addListenerForButton(back, function action() {
+        //TODO: back to previous diviison
+    });
 
 };
 
-function addListenerForButton(button) {
+function addListenerForButton(button, action) {
 
     button.addEventListener("click", function (e) {
-        var btnValue = e.target.innerHTML;
-
-        if(btnValue === "X") {
-            userA = btnValue;
-            userB = "O";
-
-            // TODO: and go to next division
-
-        } else if(btnValue === "O") {
-            userA = btnValue;
-            userB = "X";
-
-            // TODO: and go to next division
-        } else if(btnValue.indexOf("Back") !== -1) {
-            //TODO: back to previous diviison
-        }
-
+        functionality();
     }, false);
 
 }
