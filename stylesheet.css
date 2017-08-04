@@ -47,8 +47,26 @@ header p {
 }
 
 .game-choice {
-    visibility: hidden;
 }
+
+.game-choice button {
+    background: none;
+    border: none;
+    font-size: 4em;
+    outline: none;
+
+    -webkit-transition-property: color; /* Safari */
+    -webkit-transition-duration: 0.5s; /* Safari */
+    -webkit-transition-delay: 0.5s; /* Safari */
+    transition-property: color;
+    transition-duration: 0.5s;
+    transition-delay: 0.1s;
+}
+
+.game-choice button:hover {
+    color: white;
+}
+/* ------------------------------------- */
 
 .fields {
     color: white;
@@ -71,6 +89,7 @@ header p {
 li {
     list-style: none;
     text-align: -webkit-match-parent;
+    cursor: pointer;
 }
 
 li i {
@@ -87,6 +106,7 @@ li i {
 .game-board {
     margin-top: 10px;
     position: relative;
+    display: none;
 }
 
 #canvas {
