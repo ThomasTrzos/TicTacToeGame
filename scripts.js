@@ -6,6 +6,7 @@ let gameMode;
 let gameChoice;
 let gameBoard;
 let gameResult;
+let gameStarts;
 
 let board;
 let movesCounter = 0;
@@ -37,6 +38,7 @@ window.onload = function(){
     gameChoice = $("#game-choice");
     gameBoard = $("#game-board");
     gameResult = $("#game-result");
+    gameStarts = $("#game-who-starts");
 
     // -----------------
 
@@ -86,7 +88,6 @@ window.onload = function(){
                                         }
                                     }
                                 } else {
-                                    console.log("DEBUG")
                                     computerMakesMove(document.getElementById("9"), userB);
                                 }
                             }
@@ -207,14 +208,14 @@ window.onload = function(){
         userA = "X";
         userB = "O";
         addAnimBetweenDivs(gameChoice, gameBoard);
-        checkWhoStarts();
+        showWhoseStarts(checkWhoStarts());
     });
 
     addListenerForElement("o-btn", function action() {
         userA = "O";
         userB = "X";
         addAnimBetweenDivs(gameChoice, gameBoard);
-        checkWhoStarts();
+        showWhoseStarts(checkWhoStarts());
     });
 
     addListenerForElement("back-btn", function action() {
@@ -223,6 +224,14 @@ window.onload = function(){
 
     addListenerForElement("game-result", function action() {
         restartGame();
+    });
+
+    addListenerForElement("game-who-starts", function action() {
+        gameStarts.addClass('hidden');
+
+        setTimeout(function () {
+            gameStarts.addClass('visually-hidden');
+        }, 500);
     })
 };
 
@@ -280,6 +289,24 @@ function showGameResults(winnerMsg) {
     }, 500);
 }
 
+function showWhoseStarts(message) {
+    alert(message);
+    $("#user-who-starts").html(message);
+
+    gameStarts.removeClass('hidden');
+
+    setTimeout(function () {
+        gameStarts.removeClass('visually-hidden');
+    }, 500);
+
+    /*gameStarts.addClass('hidden');
+
+    setTimeout(function () {
+        gameStarts.addClass('visually-hidden');
+    }, 500);
+     */
+}
+
 function restartGame() {
 
     movesCounter = 0;
@@ -324,10 +351,7 @@ function findMove(symbol) { // to win or to block
 
     for(let element of combos) {
 
-        console.log("DEBUG: " + board[element[0]] + " " + board[element[1]] + " " + board[element[2]]);
-
         if(board[element[0]] === "..." && board[element[1]] === symbol && board[element[2]] === symbol) {
-            console.log(board[element[0]] + " " + userA + " COMPARISION ");
             if(board[element[0]] !== userA || board[element[0]] !== userB) {
                 return element[0] + 1;
             }
@@ -335,14 +359,12 @@ function findMove(symbol) { // to win or to block
         }
 
         if(board[element[0]] === symbol && board[element[1]] === "..." && board[element[2]] === symbol) {
-            console.log(board[element[1]] + " " + userA + " COMPARISION ");
             if(board[element[1]] !== userA || board[element[1]] !== userB) {
                 return element[1] + 1;
             }
         }
 
         if(board[element[0]] === symbol && board[element[1]] === symbol && board[element[2]] === "...") {
-            console.log(board[element[2]] + " " + userA + " COMPARISION ");
             if(board[element[2]] !== userA || board[element[2]] !== userB) {
                 return element[2] + 1;
             }
@@ -378,13 +400,24 @@ function checkWhoStarts() {
     turn = Math.floor((Math.random() * 10) + 1) % 2 === 0; // true - playerOne, false - playerTwo
 
     if(turn) {
-        //alert("Your turn!"); // TODO: innerHTML
-        computerStarted = false;
-    } else {
-        //alert("UserB turn"); // TODO: innerHTML
-        computerStarted = true;
-    }
 
+        computerStarted = false;
+
+        if(gameWithComputer) {
+            return "You start!";
+        } else {
+            return "Player 1 starts!";
+        }
+
+    } else {
+        computerStarted = true;
+
+        if(gameWithComputer) {
+            return "Computer starts!"
+        } else {
+            return "Player 2 starts!";
+        }
+    }
 }
 
 
