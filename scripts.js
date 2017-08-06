@@ -41,7 +41,7 @@ window.onload = function(){
                     htmlListToArray();
 
                     if(checkGameResult(userA)) {
-                        showGameResults();
+                        showGameResults("Player 1 wins!");
                     }
 
                     turn = false;
@@ -51,7 +51,7 @@ window.onload = function(){
                     htmlListToArray();
 
                     if(checkGameResult(userB)) {
-                        showGameResults();
+                        showGameResults("Player 2 wins!");
                     }
 
                     turn = true;
@@ -121,7 +121,9 @@ function addAnimBetweenDivs(divA, divB) { // hide and show divs
     }, 500);
 }
 
-function showGameResults() {
+function showGameResults(winnerMsg) {
+
+    $("#winner").html(winnerMsg);
 
     gameResult.removeClass('hidden');
 
@@ -166,12 +168,9 @@ function checkGameResult(symbol) {
         [2, 4, 6]
     ];
 
-    for(var i = 0; i<combos.length; i++) {
-
-        console.log(board[combos[i][0]] + " " + board[combos[i][1]] + " " + board[combos[i][2]]);
+    for(var i = 0; i<combos.length; i++) { // it could be checked using jquerry without translate html array to js
 
         if(board[combos[i][0]] === symbol && board[combos[i][1]] === symbol && board[combos[i][2]] === symbol) {
-
             return true;
         }
     }
