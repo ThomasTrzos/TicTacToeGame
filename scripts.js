@@ -35,6 +35,7 @@ window.onload = function(){
 
                 if(turn) {
                     e.target.innerHTML = userA;
+                    e.target.style.color = "rgba(220, 220, 220, .7)";
                     htmlListToArray();
 
                     if(checkGameResult(userA)) {
@@ -44,6 +45,7 @@ window.onload = function(){
                     turn = false;
                 } else {
                     e.target.innerHTML = userB;
+                    e.target.style.color = "rgba(220, 220, 220, .7)";
                     htmlListToArray();
 
                     if(checkGameResult(userB)) {
