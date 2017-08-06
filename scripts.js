@@ -299,7 +299,6 @@ function showGameResults(winnerMsg) {
 }
 
 function showWhoseStarts(message) {
-    alert(message);
     $("#user-who-starts").html(message);
 
     gameStarts.removeClass('hidden');
