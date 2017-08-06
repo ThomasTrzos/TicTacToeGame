@@ -31,11 +31,24 @@ window.onload = function(){
 
             if(turn) {
                 e.target.innerHTML = userA;
+                htmlListToArray();
+
+                if(checkGameResult(userA)) {
+                    alert("UserA won!");
+                }
+
+                turn = false;
             } else {
                 e.target.innerHTML = userB;
+                htmlListToArray();
+
+                if(checkGameResult(userB)) {
+                    alert("UserB won!");
+                }
+
+                turn = true;
             }
 
-            htmlListToArray();
             },false);
     }
 
@@ -54,12 +67,16 @@ window.onload = function(){
         userA = "X";
         userB = "O";
         addAnimBetweenDivs(gameChoice, gameBoard);
+
+        // game should start here
     });
 
     addListenerForButton("o-btn", function action() {
         userA = "O";
         userB = "X";
         addAnimBetweenDivs(gameChoice, gameBoard)
+
+        // game should start here
     });
 
     addListenerForButton("back-btn", function action() {
