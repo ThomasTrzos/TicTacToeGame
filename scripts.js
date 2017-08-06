@@ -61,39 +61,40 @@ window.onload = function(){
             },false);
     }
 
-    // add event listener for 'X' & 'O' buttons in game-choice division
-
-
-    addListenerForButton("one-btn", function action() {
+    addListenerForElement("one-btn", function action() {
         gameWithComputer = false;
         addAnimBetweenDivs(gameMode, gameChoice);
     });
 
-    addListenerForButton("two-btn", function action() {
+    addListenerForElement("two-btn", function action() {
         gameWithComputer = true;
         addAnimBetweenDivs(gameMode, gameChoice);
     });
 
-    addListenerForButton("x-btn", function action() {
+    addListenerForElement("x-btn", function action() {
         userA = "X";
         userB = "O";
         addAnimBetweenDivs(gameChoice, gameBoard);
         checkWhoStars();
     });
 
-    addListenerForButton("o-btn", function action() {
+    addListenerForElement("o-btn", function action() {
         userA = "O";
         userB = "X";
         addAnimBetweenDivs(gameChoice, gameBoard);
         checkWhoStars();
     });
 
-    addListenerForButton("back-btn", function action() {
+    addListenerForElement("back-btn", function action() {
         addAnimBetweenDivs(gameChoice, gameMode);
     });
+
+    addListenerForElement("game-result", function action() {
+        restartGame();
+    })
 };
 
-function addListenerForButton(id, action) {
+function addListenerForElement(id, action) {
 
     var element = $("#" + id);
 
@@ -118,7 +119,6 @@ function addAnimBetweenDivs(divA, divB) { // hide and show divs
     setTimeout(function () {
         divB.removeClass('visually-hidden');
     }, 500);
-
 }
 
 function showGameResults() {
@@ -128,7 +128,21 @@ function showGameResults() {
     setTimeout(function () {
         gameResult.removeClass('visually-hidden');
     }, 500);
+}
 
+function restartGame() {
+
+    $("ul li i").each(function() {
+        $(this).css("color", "transparent");
+        $(this).text("...");
+    });
+
+    gameResult.addClass('hidden');
+
+    setTimeout(function () {
+        gameResult.addClass('visually-hidden');
+
+    }, 500);
 }
 
 function htmlListToArray() {
