@@ -238,7 +238,7 @@ window.onload = function(){
             gameStarts.addClass('visually-hidden');
         }, 500);
 
-        if(gameWithComputer) { // forced click on empty div
+        if(gameWithComputer && computerStarted) { // forced click on empty div
             document.getElementById("5").click(); // doesn't matter where I 'click'
         }
     })
