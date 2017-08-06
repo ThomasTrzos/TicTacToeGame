@@ -86,29 +86,46 @@ window.onload = function(){
                                         }
                                     }
                                 } else {
-                                    // what then?
+                                    console.log("DEBUG")
+                                    computerMakesMove(document.getElementById("9"), userB);
                                 }
                             }
 
                             if(movesCounter === 4) {
-                                let move = findMoveToWin(userB);
+                                let move = findMove(userB); // move to win
                                 if(move !== -1) {
                                     computerMakesMove(document.getElementById(move.toString()), userB);
                                 } else {
-                                    for(let element of corners) {
-                                        if(checkIsFieldEmpty(element)) {
-                                            computerMakesMove(document.getElementById(element.toString()), userB);
-                                            break;
+
+                                    move = findMove(userA); // move to block
+
+                                    if(move !== -1) { // if you have to block opponent
+                                        computerMakesMove(document.getElementById(move.toString()), userB);
+                                    } else { // if you don't have to block opponent
+                                        for(let element of corners) {
+                                            if(checkIsFieldEmpty(element)) {
+                                                computerMakesMove(document.getElementById(element.toString()), userB);
+                                                break;
+                                            }
                                         }
                                     }
                                 }
                             }
 
                             if(movesCounter === 6) {
-                                let move = findMoveToWin(userB);
+                                let move = findMove(userB);
                                 if(move !== -1) {
                                     computerMakesMove(document.getElementById(move.toString()), userB);
+                                } else {
+                                    move = findMove(userA);
+                                    computerMakesMove(document.getElementById(move.toString()), userB);
                                 }
+                            }
+
+                            if(movesCounter === 8) {
+                                let move = findEmptyField();
+                                console.log(move);
+                                computerMakesMove(document.getElementById(move.toString()), userB);
                             }
 
 
@@ -281,7 +298,7 @@ function checkGameResult(symbol) {
     return false;
 }
 
-function findMoveToWin(symbol) {
+function findMove(symbol) { // to win or to block
 
     for(let element of combos) {
 
@@ -289,7 +306,7 @@ function findMoveToWin(symbol) {
 
         if(board[element[0]] === "..." && board[element[1]] === symbol && board[element[2]] === symbol) {
             console.log(board[element[0]] + " " + userA + " COMPARISION ");
-            if(board[element[0]] !== userA) {
+            if(board[element[0]] !== userA || board[element[0]] !== userB) {
                 return element[0] + 1;
             }
 
@@ -297,20 +314,31 @@ function findMoveToWin(symbol) {
 
         if(board[element[0]] === symbol && board[element[1]] === "..." && board[element[2]] === symbol) {
             console.log(board[element[1]] + " " + userA + " COMPARISION ");
-            if(board[element[1]] !== userA) {
+            if(board[element[1]] !== userA || board[element[1]] !== userB) {
                 return element[1] + 1;
             }
         }
 
         if(board[element[0]] === symbol && board[element[1]] === symbol && board[element[2]] === "...") {
             console.log(board[element[2]] + " " + userA + " COMPARISION ");
-            if(board[element[2]] !== userA) {
+            if(board[element[2]] !== userA || board[element[2]] !== userB) {
                 return element[2] + 1;
             }
         }
     }
 
     return -1;
+}
+
+function findEmptyField() {
+
+    for(let element of board) {
+        console.log("EMPTY?: " + board.indexOf(element));
+        if(element === "...") {
+            return board.indexOf(element) + 1;
+        }
+    }
+
 }
 
 function checkWhoStars() {
