@@ -128,29 +128,50 @@ window.onload = function(){
                                 computerMakesMove(document.getElementById(move.toString()), userB);
                             }
 
-
-
-
-
-
-
                         } else {
 
-                            if(movesCounter === 2) { // should choose a middle field
-                                computerMakesMove(document.getElementById("5"), userB);
+                            if (movesCounter === 1) { // should choose a middle field
+                                if(checkIsFieldEmpty(5)) { // middle field has been choosen (not smart decision)
+                                    computerMakesMove(document.getElementById("5"), userB);
+                                } else {
+                                    computerMakesMove(document.getElementById("1"), userB);
+                                }
+
                             }
 
+                            if(movesCounter === 3) {
+                                let move = findEmptyFieldNotCorner();
+                                computerMakesMove(document.getElementById(move), userB);
+                            }
+
+                            if(movesCounter === 5) {
+                                let move = findMove(userB); // for win
+
+                                if(move !== -1) {
+                                    computerMakesMove(document.getElementById(move), userB);
+                                } else {
+                                    move = findMove(userA); // for block
+
+                                    if(move !== -1) {
+                                        computerMakesMove(document.getElementById(move), userB);
+                                    } else {
+                                        move = findEmptyField();
+                                        computerMakesMove(document.getElementById(move), userB);
+                                    }
+                                }
+                            }
+
+                            if(movesCounter === 7) {
+                                let move = findMove(userA); // for block
+
+                                if(move !== -1) {
+                                    computerMakesMove(document.getElementById(move), userB);
+                                } else {
+                                    move = findEmptyField();
+                                    computerMakesMove(document.getElementById(move), userB);
+                                }
+                            }
                         }
-
-
-
-
-
-
-
-
-
-
                     }
 
                     if(checkGameResult(userB) && movesCounter <= 9) {
@@ -186,14 +207,14 @@ window.onload = function(){
         userA = "X";
         userB = "O";
         addAnimBetweenDivs(gameChoice, gameBoard);
-        checkWhoStars();
+        checkWhoStarts();
     });
 
     addListenerForElement("o-btn", function action() {
         userA = "O";
         userB = "X";
         addAnimBetweenDivs(gameChoice, gameBoard);
-        checkWhoStars();
+        checkWhoStarts();
     });
 
     addListenerForElement("back-btn", function action() {
@@ -262,6 +283,7 @@ function showGameResults(winnerMsg) {
 function restartGame() {
 
     movesCounter = 0;
+    checkWhoStarts();
 
     $("ul li i").each(function() {
         $(this).css("color", "transparent");
@@ -331,23 +353,33 @@ function findMove(symbol) { // to win or to block
 }
 
 function findEmptyField() {
-
     for(let element of board) {
-        console.log("EMPTY?: " + board.indexOf(element));
         if(element === "...") {
             return board.indexOf(element) + 1;
         }
     }
-
 }
 
-function checkWhoStars() {
+function findEmptyFieldNotCorner() {
 
-    //turn = Math.floor((Math.random() * 10) + 1) % 2 === 0; // true - playerOne, false - playerTwo
-    turn = false;
+    const notCorners = [1, 3, 5, 7];
+
+    for(let i=0; i<board.length; i++) {
+        if(board[i] === "...") {
+            if(notCorners.indexOf(i)) {
+                return board.indexOf(board[i]) + 1;
+            }
+        }
+    }
+}
+
+function checkWhoStarts() {
+
+    turn = Math.floor((Math.random() * 10) + 1) % 2 === 0; // true - playerOne, false - playerTwo
 
     if(turn) {
         //alert("Your turn!"); // TODO: innerHTML
+        computerStarted = false;
     } else {
         //alert("UserB turn"); // TODO: innerHTML
         computerStarted = true;
