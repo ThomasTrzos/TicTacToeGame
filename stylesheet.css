@@ -180,6 +180,25 @@ li i {
     display: block;
 }
 
+.game-result {
+    background: rgba(230, 38, 67, 0.7);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    color: white;
+    border-radius: 10px;
+    font-size: 4em;
+    transition: all 0.5s linear;
+    transition-property: display, opacity;
+    position: absolute;
+}
+
+.game-result p {
+    padding-top: 30%;
+}
+
 .hidden {
     display: none;
     transition: all 2s linear;

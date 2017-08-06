@@ -5,6 +5,7 @@ var userB = ""; // or computer
 var gameMode;
 var gameChoice;
 var gameBoard;
+var gameResult;
 
 var combos;
 var board;
@@ -21,6 +22,7 @@ window.onload = function(){
     gameMode = $("#game-mode");
     gameChoice = $("#game-choice");
     gameBoard = $("#game-board");
+    gameResult = $("#game-result");
 
     // -----------------
 
@@ -39,7 +41,7 @@ window.onload = function(){
                     htmlListToArray();
 
                     if(checkGameResult(userA)) {
-                        alert("UserA won!"); // TODO: need to show it in some div
+                        showGameResults();
                     }
 
                     turn = false;
@@ -49,7 +51,7 @@ window.onload = function(){
                     htmlListToArray();
 
                     if(checkGameResult(userB)) {
-                        alert("UserB won!"); // TODO: need to show it in some div
+                        showGameResults();
                     }
 
                     turn = true;
@@ -82,12 +84,12 @@ window.onload = function(){
     addListenerForButton("o-btn", function action() {
         userA = "O";
         userB = "X";
-        addAnimBetweenDivs(gameChoice, gameBoard)
+        addAnimBetweenDivs(gameChoice, gameBoard);
         checkWhoStars();
     });
 
     addListenerForButton("back-btn", function action() {
-        addAnimBetweenDivs(gameChoice, gameMode); // change it
+        addAnimBetweenDivs(gameChoice, gameMode);
     });
 };
 
@@ -115,6 +117,16 @@ function addAnimBetweenDivs(divA, divB) { // hide and show divs
 
     setTimeout(function () {
         divB.removeClass('visually-hidden');
+    }, 500);
+
+}
+
+function showGameResults() {
+
+    gameResult.removeClass('hidden');
+
+    setTimeout(function () {
+        gameResult.removeClass('visually-hidden');
     }, 500);
 
 }
