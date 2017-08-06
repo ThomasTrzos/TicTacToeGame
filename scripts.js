@@ -67,6 +67,11 @@ window.onload = function(){
                     }
 
                     turn = false;
+
+                    if(gameWithComputer) { // forced click on empty div
+                        document.getElementById(findEmptyField()).click();
+                    }
+
                 } else { // player two or computer
 
                     if(!gameWithComputer) { // player two
@@ -232,6 +237,10 @@ window.onload = function(){
         setTimeout(function () {
             gameStarts.addClass('visually-hidden');
         }, 500);
+
+        if(gameWithComputer) { // forced click on empty div
+            document.getElementById("5").click(); // doesn't matter where I 'click'
+        }
     })
 };
 
@@ -299,12 +308,6 @@ function showWhoseStarts(message) {
         gameStarts.removeClass('visually-hidden');
     }, 500);
 
-    /*gameStarts.addClass('hidden');
-
-    setTimeout(function () {
-        gameStarts.addClass('visually-hidden');
-    }, 500);
-     */
 }
 
 function restartGame() {
