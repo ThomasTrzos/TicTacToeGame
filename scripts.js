@@ -9,6 +9,7 @@ var gameResult;
 
 var combos;
 var board;
+var movesCounter = 0;
 
 var gameWithComputer; // true - computer, false - two players
 var turn = true; // whose turn is now (true - playerOne, false - playerTwo)
@@ -40,8 +41,16 @@ window.onload = function(){
                     e.target.style.color = "rgba(220, 220, 220, .7)";
                     htmlListToArray();
 
-                    if(checkGameResult(userA)) {
-                        showGameResults("Player 1 wins!");
+                    if(checkGameResult(userA) && movesCounter <= 9) {
+                        if(!gameWithComputer) {
+                            showGameResults("Player 1 wins!");
+                        } else {
+                            showGameResults("You lost!")
+                        }
+                    }
+
+                    if(movesCounter === 9) {
+                        showGameResults("It was a draw!");
                     }
 
                     turn = false;
@@ -50,8 +59,16 @@ window.onload = function(){
                     e.target.style.color = "rgba(220, 220, 220, .7)";
                     htmlListToArray();
 
-                    if(checkGameResult(userB)) {
-                        showGameResults("Player 2 wins!");
+                    if(checkGameResult(userB && movesCounter <= 9)) {
+                        if(!gameWithComputer) {
+                            showGameResults("Player 2 wins!");
+                        } else {
+                            showGameResults("You lost!")
+                        }
+                    }
+
+                    if(movesCounter === 9) {
+                        showGameResults("It was a draw!");
                     }
 
                     turn = true;
@@ -134,6 +151,8 @@ function showGameResults(winnerMsg) {
 
 function restartGame() {
 
+    movesCounter = 0;
+
     $("ul li i").each(function() {
         $(this).css("color", "transparent");
         $(this).text("...");
@@ -156,6 +175,8 @@ function htmlListToArray() {
 }
 
 function checkGameResult(symbol) {
+
+    movesCounter+=1;
 
     combos = [
         [0, 1, 2],
