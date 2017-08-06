@@ -9,7 +9,9 @@ var gameBoard;
 var combos;
 var board;
 
+var gameWithComputer; // true - computer, false - two players
 var turn = true; // whose turn is now (true - playerOne, false - playerTwo)
+
 
 
 window.onload = function(){
@@ -29,24 +31,27 @@ window.onload = function(){
     {
         li[i].addEventListener("click", function(e) {
 
-            if(turn) {
-                e.target.innerHTML = userA;
-                htmlListToArray();
+            if(e.target.innerHTML === "...") {
 
-                if(checkGameResult(userA)) {
-                    alert("UserA won!");
+                if(turn) {
+                    e.target.innerHTML = userA;
+                    htmlListToArray();
+
+                    if(checkGameResult(userA)) {
+                        alert("UserA won!"); // TODO: need to show it in some div
+                    }
+
+                    turn = false;
+                } else {
+                    e.target.innerHTML = userB;
+                    htmlListToArray();
+
+                    if(checkGameResult(userB)) {
+                        alert("UserB won!"); // TODO: need to show it in some div
+                    }
+
+                    turn = true;
                 }
-
-                turn = false;
-            } else {
-                e.target.innerHTML = userB;
-                htmlListToArray();
-
-                if(checkGameResult(userB)) {
-                    alert("UserB won!");
-                }
-
-                turn = true;
             }
 
             },false);
@@ -56,10 +61,12 @@ window.onload = function(){
 
 
     addListenerForButton("one-btn", function action() {
+        gameWithComputer = false;
         addAnimBetweenDivs(gameMode, gameChoice);
     });
 
     addListenerForButton("two-btn", function action() {
+        gameWithComputer = true;
         addAnimBetweenDivs(gameMode, gameChoice);
     });
 
@@ -67,35 +74,19 @@ window.onload = function(){
         userA = "X";
         userB = "O";
         addAnimBetweenDivs(gameChoice, gameBoard);
-
-        // game should start here
+        checkWhoStars();
     });
 
     addListenerForButton("o-btn", function action() {
         userA = "O";
         userB = "X";
         addAnimBetweenDivs(gameChoice, gameBoard)
-
-        // game should start here
+        checkWhoStars();
     });
 
     addListenerForButton("back-btn", function action() {
         addAnimBetweenDivs(gameChoice, gameMode); // change it
     });
-
-    // GAME LOGIC - it shouldn't start on window.load
-
-    // check who stars - player 1 or player 2 (computer)
-
-    turn = Math.floor((Math.random() * 10) + 1) % 2 === 0; // true - playerOne, false - playerTwo
-
-    if(turn) {
-        alert("Your turn!"); // innerHTML
-    } else {
-        alert("UserB turn"); // innerHTML
-    }
-
-
 };
 
 function addListenerForButton(id, action) {
@@ -158,6 +149,18 @@ function checkGameResult(symbol) {
     }
 
     return false;
+}
+
+function checkWhoStars() {
+
+    turn = Math.floor((Math.random() * 10) + 1) % 2 === 0; // true - playerOne, false - playerTwo
+
+    if(turn) {
+        alert("Your turn!"); // TODO: innerHTML
+    } else {
+        alert("UserB turn"); // TODO: innerHTML
+    }
+
 }
 
 
