@@ -345,6 +345,8 @@ function restartGame() {
         gameResult.addClass('visually-hidden');
 
     }, 500);
+
+    showWhoseStarts(checkWhoStarts());
 }
 
 function htmlListToArray() {
