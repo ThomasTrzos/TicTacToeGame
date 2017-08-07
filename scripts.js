@@ -69,7 +69,10 @@ window.onload = function(){
                     turn = false;
 
                     if(gameWithComputer) { // forced click on empty div
-                        document.getElementById(findEmptyField()).click();
+                        let tmpElement = document.getElementById(findEmptyField());
+                        if(tmpElement !== null) {
+                            tmpElement.click();
+                        }
                     }
 
                 } else { // player two or computer
@@ -79,6 +82,8 @@ window.onload = function(){
                     } else { // computer moves
 
                         if(computerStarted) {
+
+                            console.log("DEBUG: " + movesCounter);
 
                             if(movesCounter === 0 ) { // should choose any corner
                                 computerMakesMove(document.getElementById("1"), userB);
@@ -110,8 +115,11 @@ window.onload = function(){
                                     } else { // if you don't have to block opponent
                                         for(let element of corners) {
                                             if(checkIsFieldEmpty(element)) {
-                                                computerMakesMove(document.getElementById(element.toString()), userB);
-                                                break;
+                                                if(checkIsFieldEmpty(element-3)) { // loking for empty-open corner
+                                                    console.log("CHECK IS FIELD EMPTY: " + element);
+                                                    computerMakesMove(document.getElementById(element.toString()), userB);
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
@@ -146,8 +154,20 @@ window.onload = function(){
                             }
 
                             if(movesCounter === 3) {
-                                let move = findEmptyFieldNotCorner();
-                                computerMakesMove(document.getElementById(move), userB);
+
+                                let move = findMove(userA); // move to block
+
+                                if(move !== -1) { // if you have to block opponent
+                                } else { // if you don't have to block opponent
+
+                                    if(checkIsPossibleToDouble(userA)){
+                                        move = 2;
+                                    } else {
+                                        move = findEmptyFieldNotCorner();
+                                    }
+                                }
+
+                                computerMakesMove(document.getElementById(move.toString()), userB);
                             }
 
                             if(movesCounter === 5) {
@@ -156,7 +176,7 @@ window.onload = function(){
                                 if(move !== -1) {
                                     computerMakesMove(document.getElementById(move), userB);
                                 } else {
-                                    move = findMove(userA); // for block
+                                    move = findMove(userA);
 
                                     if(move !== -1) {
                                         computerMakesMove(document.getElementById(move), userB);
@@ -257,7 +277,12 @@ function computerMakesMove(element, computer) {
 }
 
 function checkIsFieldEmpty(fieldNum) {
+    console.log("FIELD NUM " + fieldNum + ": " + board[fieldNum - 1]);
     return board[fieldNum - 1] === "...";
+}
+
+function checkIsPossibleToDouble(opponent) {
+    return (board[0] === opponent && board[8] === opponent) || (board[2] === opponent && board[6] === opponent);
 }
 
 function addListenerForElement(id, action) {
