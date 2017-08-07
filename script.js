@@ -83,8 +83,6 @@ window.onload = function(){
 
                         if(computerStarted) {
 
-                            console.log("DEBUG: " + movesCounter);
-
                             if(movesCounter === 0 ) { // should choose any corner
                                 computerMakesMove(document.getElementById("1"), userB);
                             }
@@ -116,7 +114,6 @@ window.onload = function(){
                                         for(let element of corners) {
                                             if(checkIsFieldEmpty(element)) {
                                                 if(checkIsFieldEmpty(element-3)) { // loking for empty-open corner
-                                                    console.log("CHECK IS FIELD EMPTY: " + element);
                                                     computerMakesMove(document.getElementById(element.toString()), userB);
                                                     break;
                                                 }
@@ -138,7 +135,6 @@ window.onload = function(){
 
                             if(movesCounter === 8) {
                                 let move = findEmptyField();
-                                console.log(move);
                                 computerMakesMove(document.getElementById(move.toString()), userB);
                             }
 
@@ -277,7 +273,6 @@ function computerMakesMove(element, computer) {
 }
 
 function checkIsFieldEmpty(fieldNum) {
-    console.log("FIELD NUM " + fieldNum + ": " + board[fieldNum - 1]);
     return board[fieldNum - 1] === "...";
 }
 
@@ -446,5 +441,3 @@ function checkWhoStarts() {
         }
     }
 }
-
-
