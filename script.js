@@ -184,14 +184,14 @@ window.onload = function(){
                             }
 
                             if(movesCounter === 7) {
-                                let move = findMove(userA); // for block
-
-                                if(move !== -1) {
-                                    computerMakesMove(document.getElementById(move), userB);
-                                } else {
-                                    move = findEmptyField();
-                                    computerMakesMove(document.getElementById(move), userB);
+                                let move = findMove(userB);
+                                if(move === -1) {
+                                    move = findMove(userA);
+                                    if(move === -1) {
+                                        move = findEmptyField();
+                                    }
                                 }
+                                computerMakesMove(document.getElementById(move), userB);
                             }
                         }
                     }
